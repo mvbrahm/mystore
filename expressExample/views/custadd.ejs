@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/head') -%> <!-- head partial -->
+  </head>
+  <body>
+    
+    <%- include('./partials/header') -%> <!-- includes header partial with navigation bar -->
+
+    <!-- Sets up a welcome message.  We'll talk about the title variable placeholder next week. -->
+    <h1 class="text-center">  <%= title %></h1>
+    <p class="text-center"> Add New Customer Below</p>
+
+    <form action="/custadd" method="POST"> <!--  I think this will be a post request to custadd -->
+        <div class="form-group">
+            <label for="customerNumber"> Customer Number </label>
+            <input type="number" class="form-control" id="customerNumber" name="customerNumber">
+        </div>
+        <div class="form-group">
+            <label for="customerName"> Customer Name </label>
+            <input type="text" class="form-control" id="customerName" name="customerName">
+        </div>
+        <div class="form-group">
+            <label for="contactLastName"> Contact Last Name </label>
+            <input type="text" class="form-control" id="contactLastName" name="contactLastName">
+        </div>
+        <div class="form-group">
+            <label for="contactFirstName"> Contact First Name </label>
+            <input type="text" class="form-control" id="contactFirstName" name="contactFirstName">
+        </div>
+        <div class="form-group">
+            <label for="phone"> Phone </label>
+            <input type="tel" class="form-control" id="phone" name="phone">
+        </div>
+        <div class="form-group">
+            <label for="addressLine1"> Address Line 1 </label>
+            <input type="text" class="form-control" id="addressLine1" name="addressLine1">
+        </div>
+        <div class="form-group">
+            <label for="addressLine2"> Address Line 2 </label>
+            <input type="text" class="form-control" id="addressLine2" name="addressLine2">
+        </div>
+        <div class="form-group">
+            <label for="city"> City </label>
+            <input type="text" class="form-control" id="city" name="city">
+        </div>
+        <div class="form-group">
+            <label for="state"> State Code </label>
+            <input type="text" class="form-control" id="state" name="state">
+        </div>
+        <div class="form-group">
+            <label for="email"> Email </label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="postalCode"> Postal Code </label>
+            <input type="number" class="form-control" id="postalCode" name="postalCode">
+        </div>
+        <div class="form-group">
+            <label for="country"> Country </label>
+            <input type="text" class="form-control" id="country" name="country">
+        </div>
+        <div class="form-group">
+            <label for="salesRepEmployeeNumber"> Sales Rep Employee Number </label>
+            <input type="number" class="form-control" id="salesRepEmployeeNumber" name="salesRepEmployeeNumber">
+        </div>
+        <div class="form-group">
+            <label for="creditLimit"> Credit Limit </label>
+            <input type="number" class="form-control" id="creditLimit" name="creditLimit">
+        </div>
+        <div class="form-group">
+            <label for="fax"> Fax </label>
+            <input type="tel" class="form-control" id="fax" name="fax">
+        </div>
+        <button type="submit" class="btn btn-default" style="background-color:red">Submit</button>
+    </form>
+
+    <%- include('./partials/footer') -%> <!-- includes footer partial -->
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('./partials/head') -%>
+</head>
+
+<body>
+  <header>
+    <%- include('./partials/header') -%>
+  </header>
+
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+
+  <form action="/login" method="POST">
+    <h1 class="h3 mb-3 fw-normal">Please Login Below</h1>
+    <p class="h3 mb-3 fw-normal"><%= message %></p>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+      <label for="username">Username</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+      <label for="password">Password</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+    
+  </form>
+
+</div>
+</div>
+</div>
+
+
+
+
+  <footer>
+    <%- include('./partials/footer') -%>
+  </footer>
+</body>
+
+</html>
