@@ -6,3 +6,23 @@ body {
 a {
   color: #00B7FF;
 }
+
+.dropdown-toggle {
+  background-color: #fff;
+  /* Set desired background color */
+  color: #000;
+  /* Set desired text color */
+  text-decoration: none;
+  /* Remove underline */
+}
+
+.dropdown-toggle:focus {
+  box-shadow: none;
+  /* Remove the focus box-shadow */
+  outline: none;
+  /* Remove the focus outline */
+}
+
+.custom-navbar-spacing .nav-link {
+  margin-right: 5px;
+}

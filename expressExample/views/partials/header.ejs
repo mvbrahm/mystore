@@ -1,75 +1,101 @@
-    <!-- starts our main navigation bar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <!-- The next three lines set up our logo with a link to the home page/view -->
-          <a class="navbar-brand" href="/">
-            <img src="/images/logo.png" alt="LOGO" width="60" height="40">
-          </a>
-          <!-- The next lines set up a button to display our navigation options when the screen is smaller -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <!-- This starts the content for the navigation bar -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- We create an unordered list of navigation links/items.  The first one is a home link -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link-active" aria-current="page" href="/"> Home </a>
-              </li>
-              <!-- We will need to add a submenu for customer information and entry -->
-              <li class="nav-item dropdown">
-                <!-- Set up "title" for dropdown menu section -->
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Customer
-                </a>
-                <!-- Set up options for dropdown section--> <!-- href links are temporary placeholders here-->
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/custadd"> Add </a></li> <!-- First dropdown item-->
-                  <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-                  <li><a class="dropdown-item" href="#"> Update </a></li> <!-- Second dropdown item-->
-                  <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-                  <li><a class="dropdown-item" href="#"> Delete </a></li> <!-- Third dropdown item-->
-                  <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-                  <li><a class="dropdown-item" href="/custlistall"> List all </a></li> <!-- Fourth dropdown item-->
-                  <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-                  <li><a class="dropdown-item" href="#"> Search </a></li> <!-- Last dropdown item-->
-                </ul>
-              </li>
-              <!-- We will also need to add a submenu for employee information and entry -->
-              <li class="nav-item dropdown">
-                <!-- Set up employee "title" for dropdown menu section -->
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Employee
-                </a>
-                <!-- Set up options for dropdown section--> <!-- href links are temporary placeholders here-->
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/empadd"> Add </a></li> <!-- First dropdown item-->
-                  <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-                  <li><a class="dropdown-item" href="#"> Update </a></li> <!-- Second dropdown item-->
-                  <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-                  <li><a class="dropdown-item" href="#"> Delete </a></li> <!-- Third dropdown item-->
-                  <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-                  <li><a class="dropdown-item" href="/emplistall"> List all </a></li> <!-- Fourth dropdown item-->
-                  <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-                  <li><a class="dropdown-item" href="#"> List by ID </a></li> <!-- Fifth dropdown item-->
-                  <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-                  <li><a class="dropdown-item" href="#"> Search </a></li> <!-- Sixth dropdown item-->
-                  <li><hr class="dropdown-divider"></li> <!-- Horizontal rule to act as divider-->
-                  <li><a class="dropdown-item" href="#"> Office List All </a></li> <!-- Last dropdown item-->
-                </ul>
-              </li>
-              <!-- We may need to add a submenu for product information and entry -->
-              <!-- We will need to add an About Us submenu-->
-              <!-- Link for registration -->
-              <li class="nav-item">
-                <a class="nav-link-active" aria-current="page" href="/register"> Register </a>
-              </li>
-              <!-- Link for login (Placeholder for now)-->
-              <li class="nav-item">
-                <a class="nav-link-active" aria-current="page" href="/login"> Login </a>
-              </li>
+<!-- starts our main navigation bar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <!-- The next three lines set up our logo with a link to the home page/view -->
+    <a class="navbar-brand" href="/">
+      <img src="/images/logo.png" alt="LOGO" width="60" height="40">
+    </a>
+    <!-- The next lines set up a button to display our navigation options when the screen is smaller -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- This starts the content for the navigation bar -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- We create an unordered list of navigation links/items.  The first one is a home link -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link-active" aria-current="page" href="/"> Home </a>
+        </li>
+        <!-- We will need to add a submenu for customer information and entry -->
+        <li class="nav-item">
+          <ul class="dropdown">
+            <!-- Set up "title" for dropdown menu section -->
+            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Customer
+            </a>
+            <!-- Set up options for dropdown section--> <!-- href links are temporary placeholders here-->
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/custadd"> Add </a></li> <!-- First dropdown item-->
+              <li>
+                <hr class="dropdown-divider">
+              </li> <!-- Horizontal rule to act as divider-->
+              <li><a class="dropdown-item" href="#"> Update </a></li> <!-- Second dropdown item-->
+              <li>
+                <hr class="dropdown-divider">
+              </li> <!-- Horizontal rule to act as divider-->
+              <li><a class="dropdown-item" href="#"> Delete </a></li> <!-- Third dropdown item-->
+              <li>
+                <hr class="dropdown-divider">
+              </li> <!-- Horizontal rule to act as divider-->
+              <li><a class="dropdown-item" href="/custlistall"> List all </a></li> <!-- Fourth dropdown item-->
+              <li>
+                <hr class="dropdown-divider">
+              </li> <!-- Horizontal rule to act as divider-->
+              <li><a class="dropdown-item" href="#"> Search </a></li> <!-- Last dropdown item-->
             </ul>
-          </div> <!-- closes the collapse/navbar-collapse navbar content -->
-        </div> <!-- closes our container-fluid section -->
-      </nav>
+          </ul>
+        </li>
+        <!-- We will also need to add a submenu for employee information and entry -->
+        <li class="nav-item">
+          <ul class="dropdown">
+            <!-- Set up employee "title" for dropdown menu section -->
+            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Employee
+            </a>
+            <!-- Set up options for dropdown section--> <!-- href links are temporary placeholders here-->
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/empadd"> Add </a></li> <!-- First dropdown item-->
+              <li>
+                <hr class="dropdown-divider">
+              </li> <!-- Horizontal rule to act as divider-->
+              <li><a class="dropdown-item" href="#"> Update </a></li> <!-- Second dropdown item-->
+              <li>
+                <hr class="dropdown-divider">
+              </li> <!-- Horizontal rule to act as divider-->
+              <li><a class="dropdown-item" href="#"> Delete </a></li> <!-- Third dropdown item-->
+              <li>
+                <hr class="dropdown-divider">
+              </li> <!-- Horizontal rule to act as divider-->
+              <li><a class="dropdown-item" href="/emplistall"> List all </a></li> <!-- Fourth dropdown item-->
+              <li>
+                <hr class="dropdown-divider">
+              </li> <!-- Horizontal rule to act as divider-->
+              <li><a class="dropdown-item" href="#"> List by ID </a></li> <!-- Fifth dropdown item-->
+              <li>
+                <hr class="dropdown-divider">
+              </li> <!-- Horizontal rule to act as divider-->
+              <li><a class="dropdown-item" href="#"> Search </a></li> <!-- Sixth dropdown item-->
+              <li>
+                <hr class="dropdown-divider">
+              </li> <!-- Horizontal rule to act as divider-->
+              <li><a class="dropdown-item" href="#"> Office List All </a></li> <!-- Last dropdown item-->
+            </ul>
+          </ul>
+        </li>
+        <!-- We may need to add a submenu for product information and entry -->
+        <!-- We will need to add an About Us submenu-->
+        <!-- Link for registration -->
+      </ul>
+      <ul class="navbar-nav custom-navbar-spacing">
+        <li class="nav-item">
+          <a class="nav-link btn btn-primary mr-2" href="/register"> Register </a>
+        </li>
+        <!-- Link for login (Placeholder for now)-->
+        <li class="nav-item">
+          <a class="nav-link btn btn-primary ml=5" href="/login"> Login </a>
+        </li>
+      </ul>
+    </div> <!-- closes the collapse/navbar-collapse navbar content -->
+  </div> <!-- closes our container-fluid section -->
+</nav>
