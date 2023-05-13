@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var crypto =require('crypto').webcrypto;
+var crypto = require('crypto').webcrypto;
+var jwt = require('jsonwebtoken');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
     res.render('login', { title: 'Products R Us Login', message: '' });
-  });
+});
 
-router.post('/', async(req, res, next) => {
+router.post('/', async (req, res, next) => {
     console.log(JSON.stringify(req.body)); //DEBUGGING CODE--DELETE UPON PRODUCTION
 
     // The API expects a 64 byte key (128 hex digits long):
@@ -21,14 +22,14 @@ router.post('/', async(req, res, next) => {
         return (
             // This next line ensures we're dealing with an actual array
             [...new Uint8Array(buffer)]
-            // Keep in mind that:
-            // 1 byte = 8 bits
-            // 1 hex digit = 4 bits
-            // 1 byte = 2 hex digits
-            // So, convert each 1 byte into 2 hexadecimal digits
-            .map((byte) => byte.toString(16).padStart(2, '0'))
-            // Concatenate it all together into one big string
-            .join('')
+                // Keep in mind that:
+                // 1 byte = 8 bits
+                // 1 hex digit = 4 bits
+                // 1 byte = 2 hex digits
+                // So, convert each 1 byte into 2 hexadecimal digits
+                .map((byte) => byte.toString(16).padStart(2, '0'))
+                // Concatenate it all together into one big string
+                .join('')
         );
     };
 
@@ -46,20 +47,20 @@ router.post('/', async(req, res, next) => {
     };
 
     // Turns a password (string) and salt (buffer) into a key and salt (hex strings)
-    const deriveKeyFromPassword = async (passwordString, keyTest, saltBuffer) => {
+    const deriveKeyFromPassword = async (passwordString, keyTest, saltBuffer, userName, role) => {
         // We'll use a TextEncoder to convert strings into arrays of bytes:
         const textEncoder = new TextEncoder('utf-8');
-  
+
         // Convert the password string into an array of bytes:
         const passwordBuffer = textEncoder.encode(passwordString);
-  
+
         // Use WebCrypto to generate an array of 16 random bytes if one isn't passed
         // in:
         saltBuffer =
             saltBuffer ||
             crypto.getRandomValues(new Uint8Array(SALT_SIZE_BYTES));
-  
-        console.log("SaltBuffer:",saltBuffer);
+
+        console.log("SaltBuffer:", saltBuffer);
         // Convert our passwordBuffer into something WebCrypto understands:
         const plaintextKey = await crypto.subtle.importKey(
             'raw', // We're working with a "raw" array of bytes
@@ -68,7 +69,7 @@ router.post('/', async(req, res, next) => {
             false, // We don't want anyone to extract the original password!
             ['deriveBits'] // We're gonna use this method to derive a key (below)
         );
-        
+
         // Run the WebCrypto-compatible password through the PBKDF2 algorithm:
         const pbkdf2Buffer = await crypto.subtle.deriveBits(
             {
@@ -101,57 +102,66 @@ router.post('/', async(req, res, next) => {
         // we'll need to turn our byte arrays into hex strings:
         const saltString = convertBufferToHex(saltBuffer);
         const keyString = convertBufferToHex(pbkdf2Buffer);
-        console.log("Salt=",saltString);
-        console.log("Key=",keyString);
+        console.log("Salt=", saltString);
+        console.log("Key=", keyString);
 
-  
-        console.log("Comparison",keyString, keyTest);
-            if (keyString==keyTest){
-                res.render('login', {title: 'Found User', message: 'Login successful'});
-            }
-            else{
-                res.render('login', {title: 'Found User', message: 'Login unsuccessful'});
-            }
+
+        console.log("Comparison", keyString, keyTest);
+        if (keyString == keyTest) {
+            var token = jwt.sign({
+                id: userName, role: role
+            }, global.DB_token, {
+                expiresIn: 86400
+            });
+            console.log(token);
+            global.userToken = token; //Store into global
+            res.render('login', { title: 'Found User', message: 'Login successful' });
+        }
+        else {
+            res.render('login', { title: 'Found User', message: 'Login unsuccessful' });
+        }
 
         return { keyString, saltString };
 
     };
 
     const fetch = require('node-fetch');
-    const varHttpRequest = 'https://bdpamkedev.com/api/v5/users/'+req.body.username ; //Setting uri based on user input
+    const varHttpRequest = 'https://bdpamkedev.com/api/v5/users/' + req.body.username; //Setting uri based on user input
     //console.log(varHttpRequest);
     fetch(varHttpRequest, {
         method: 'GET',
         headers: {
-          'Authorization': 'Bearer ' + global.DB_token,
-          'Content-Type': 'application/json'
+            'Authorization': 'Bearer ' + global.DB_token,
+            'Content-Type': 'application/json'
         }
-      })
-      .then(response => response.json())
-      .then(async data => {
-        console.log("Message & Data ", data);
-        if (data.message === 'No record found'){  //Username is not even in the system
-            res.render('login', {title:'Login Unsuccessful', message: 'Invalid username or password'});
-        }
-        else //Username is at least in the system
-        {
-            var userSalt=data.salt;
-            var userKey=data.key;
-            var pwTest=req.body.password;
-            console.log("Credentials",userSalt,userKey,pwTest);
-            var userBuffer=convertHexToBuffer(userSalt);
-            const {keyresult,saltresult}=await deriveKeyFromPassword(pwTest,userKey,userBuffer);
-            
-           
-        }
-        
-      })
-      .catch(error => { //Error in the fetch, not necessarily not finding a user
-        console.error(error);
-        res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
-        return "error";
-      })
+    })
+        .then(response => response.json())
+        .then(async data => {
+            console.log("Message & Data ", data);
+            if (data.message === 'No record found') {  //Username is not even in the system
+                res.render('login', { title: 'Login Unsuccessful', message: 'Invalid username or password' });
+            }
+            else //Username is at least in the system
+            {
+                var userSalt = data.salt;
+                var userKey = data.key;
+                var pwTest = req.body.password;
+                var userName = data.userName;
+                var role = data.role;
+                //console.log("Credentials",userSalt,userKey,pwTest);
+                var userBuffer = convertHexToBuffer(userSalt);
+                const { keyresult, saltresult } = await deriveKeyFromPassword(pwTest, userKey, userBuffer, userName, role);
+
+
+            }
+
+        })
+        .catch(error => { //Error in the fetch, not necessarily not finding a user
+            console.error(error);
+            res.render('login', { title: 'Invalid User', message: 'Invalid username or password', data: error.data });
+            return "error";
+        })
 
 });
 
-  module.exports = router;
+module.exports = router;
